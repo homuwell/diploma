@@ -1,0 +1,33 @@
+.navContainer {
+    display: flex;
+    flex-direction: row-reverse;
+    padding: .5em;
+    margin: 0 auto;
+    background-color: #555555;
+    list-style-type: none;
+}
+
+.navContainer > .navRight {
+    margin-right: auto;
+}
+
+.navContainer > li {
+    margin-top: 0;
+}
+
+.navContainer > li > a {
+    display: block;
+    padding: .5em 1em;
+    background-color: #708090;
+    color: white;
+    text-decoration: none;
+    border-radius: 0.3em;
+}
+.navContainer > li > a:hover {
+    background-color: white;
+    color:  #708090;
+}
+.navContainer > li + li {
+    margin-right: 1.5em;
+
+}

@@ -1,0 +1,18 @@
+.elem {
+    flex: 30%;
+    height: 100px;
+    flex-grow: 0;
+    background-color: #5468FF;
+    border-radius: 10px;
+    color:white;
+    text-align: center;
+    border: 1px solid green;
+    margin-bottom: 10px;
+
+}
+.elem a {
+
+    display: flex;
+    height: 100%;
+    text-align: center;
+}

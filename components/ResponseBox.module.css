@@ -1,0 +1,19 @@
+.Box {
+    width: 100%;
+    font-size: 20px;
+    padding: 5px 5px;
+    margin: 0 0 5px 0;
+}
+
+.successBox {
+    border: 2px solid green;
+    background: rgba(0,255,0,0.5);
+    color : green
+
+}
+
+.errorBox {
+    border: 2px solid red;
+    background: rgba(255,0,0,0.5);
+    color: red
+}

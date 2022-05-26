@@ -1,0 +1,14 @@
+
+
+.logoContainer {
+    display: flex;
+    flex-direction: row;
+
+
+}
+.logoText  {
+   font-family: 'Ubuntu', sans-serif;
+    font-size: 26px;
+    margin:0;
+    color: white;
+}

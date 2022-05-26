@@ -1,0 +1,279 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator nexusPrisma {
+  provider = "nexus-prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int      @id @default(autoincrement())
+  createdAt    DateTime @default(now())
+  login        String   @unique
+  picture      String   @unique
+  email        String   @unique
+  name         String
+  surname      String
+  phoneNumber  String   @unique
+  isActivated  Boolean  @default(false)
+  password     String
+  role         Role     @default(USER)
+  refreshToken String   @unique
+  Schema       Schema[]
+}
+
+
+model Resistor {
+      id      Int  @id @default(autoincrement())
+      Schema   Schema @relation(fields: [schemaId], references: [id])
+      schemaId Int
+      pNode Int
+      mNode Int
+      resistance Float
+}
+
+
+
+model Inductor {
+      id      Int  @id @default(autoincrement())
+      Schema   Schema @relation(fields: [schemaId], references: [id])
+      schemaId Int
+      pNode Int
+      mNode Int
+      induction Float
+}
+
+model Capacitor {
+      id      Int  @id @default(autoincrement())
+      Schema   Schema @relation(fields: [schemaId], references: [id])
+      schemaId Int
+      pNode Int
+      mNode Int
+      capacity Float
+}
+
+model VCCS {
+     id      Int  @id @default(autoincrement())
+     Schema   Schema @relation(fields: [schemaId], references: [id])
+     schemaId Int
+     pFirstNode Int
+     mFirstNode Int
+     pSecondNode Int
+     mSecondNode Int
+     transmission Float
+     T1 Float
+     T2 Float
+}
+
+model CCCS {
+     id      Int  @id @default(autoincrement())
+     Schema   Schema @relation(fields: [schemaId], references: [id])
+     schemaId Int
+     pFirstNode Int
+     mFirstNode Int
+     pSecondNode Int
+     mSecondNode Int
+     transmission Float
+     T1 Float
+     T2 Float
+}
+
+model CCVS {
+     id      Int  @id @default(autoincrement())
+     Schema   Schema @relation(fields: [schemaId], references: [id])
+     schemaId Int
+     pFirstNode Int
+     mFirstNode Int
+     pSecondNode Int
+     mSecondNode Int
+     transmission Float
+     T1 Float
+     T2 Float
+}
+
+
+model VCVS {
+     id      Int  @id @default(autoincrement())
+     Schema   Schema @relation(fields: [schemaId], references: [id])
+     schemaId Int
+     pFirstNode Int
+     mFirstNode Int
+     pSecondNode Int
+     mSecondNode Int
+     transmission Float
+     T1 Float
+     T2 Float
+}
+
+model idealTransformer {
+         id      Int  @id @default(autoincrement())
+         Schema   Schema @relation(fields: [schemaId], references: [id])
+         schemaId Int
+         pFirstNode Int
+         mFirstNode Int
+         pSecondNode Int
+         mSecondNode Int
+         gain Float
+}
+
+model transformer {
+           id Int @id @default(autoincrement())
+            Schema   Schema @relation(fields: [schemaId], references: [id])
+            schemaId Int @unique
+            pFirstNode Int
+            mFirstNode Int
+            pSecondNode Int
+            mSecondNode Int
+            R1 Float
+            R2 Float
+            L1 Float
+            L2 Float
+            M Float
+}
+
+model idealOperationAmplifier {
+         id      Int  @id @default(autoincrement())
+         Schema   Schema @relation(fields: [schemaId], references: [id])
+         schemaId Int
+         pFirstNode Int
+         mFirstNode Int
+         pSecondNode Int
+         mSecondNode Int
+}
+
+model operationAmplifier {
+         id      Int  @id @default(autoincrement())
+         Schema   Schema @relation(fields: [schemaId], references: [id])
+         schemaId Int
+         pFirstNode Int
+         mFirstNode Int
+         pSecondNode Int
+         mSecondNode Int
+         rIn Float
+         rOut Float
+         u Float
+         fT Float
+}
+
+
+model CalculationDirectives {
+    id Int @id @default(autoincrement())
+    Schema   Schema @relation(fields: [schemaId], references: [id])
+    schemaId Int @unique
+    functionType FunctionType
+    first Float
+    second Float
+    third Float
+    inNodeM Int
+    inNodeP Int
+    outNodeM Int
+    outNodeP Int
+}
+
+
+enum FunctionType {
+    SINGLE
+    LINEAR
+    LOGARITHMIC
+
+}
+
+model bipolarTransistor {
+        id Int @id @default(autoincrement())
+        Schema   Schema @relation(fields: [schemaId], references: [id])
+        schemaId Int @unique
+        ne Int
+        nc Int
+        nb Int
+        Rb Float
+        Re Float
+        Rc Float
+        Ce Float
+        Cc Float
+        b Float
+}
+
+model unipolarTransistor {
+        id Int @id @default(autoincrement())
+        Schema   Schema @relation(fields: [schemaId], references: [id])
+        schemaId Int @unique
+        nz Int
+        ns Int
+        ni Int
+        Rc Float
+        Czi Float
+        Czs Float
+        Csi Float
+        S Float
+}
+
+model SchemaResults {
+        id Int @id @default(autoincrement())
+        Schema   Schema @relation(fields: [schemaId], references: [id])
+        schemaId Int
+        f Float
+        kum Float
+        kua Float
+        rim Float
+        ria Float
+        roa Float
+        rom Float
+
+}
+
+model Schema {
+  id      Int  @id @default(autoincrement())
+  User   User @relation(fields: [UserId], references: [id])
+  UserId Int
+  name String
+  nv      Int  @default(0) //Число узлов
+  nr      Int  @default(0) // Чило резисторов
+  nc      Int  @default(0) // Число конденсаторов
+  nl      Int  @default(0) // Число катушек индуктивности
+  nf      Int  @default(0) // ?
+  nou     Int  @default(0) // число операционных усилителей
+  noui    Int  @default(0) // число идеальных операционных усилителей
+  nji     Int  @default(0) // число источников тока, управляемых током
+  nei     Int  @default(0) // число источников напряжения, управляемых током
+  nju     Int  @default(0) // число источников напряжения, управляемых напряжением
+  nev     Int  @default(0) // число источников тока, управляемых напряжением
+  ntr     Int  @default(0) // число трансформаторов
+  ntri    Int  @default(0) // число идеальных трансформаторов
+  ntb     Int  @default(0) // число биполярных транзисторов
+  ntu     Int  @default(0) // число униполярных тразисторов
+
+  lp Int @default(0) // ?
+  lm Int @default(0) // ?
+  kp Int @default(0) // ?
+  km Int @default(0) // ?
+  Resistor Resistor[]
+  Inductor Inductor[]
+  Capacitor Capacitor[]
+  VCCS VCCS[]
+  VCVS VCVS[]
+  CCCS CCCS[]
+  CCVS CCVS[]
+  unipolarTransistor unipolarTransistor[]
+  bipolarTransistor bipolarTransistor[]
+  transformer transformer[]
+  idealTransformer idealTransformer[]
+  operationAmplifier operationAmplifier[]
+  idealOperationAmplifier idealOperationAmplifier[]
+  CalculationDirectives CalculationDirectives?
+  SchemaResults SchemaResults[]
+}
+
+enum Role {
+  USER
+  PREMIUMUSER
+  ADMIN
+
+}

@@ -1,0 +1,26 @@
+.SideNav {
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    align-items: center;
+}
+.SideNav li:not(:first-child) {
+    margin: 0 0 0 10px;
+}
+
+.SideNav li {
+    list-style: none;
+}
+
+.SideNav li a {
+    font-size: 13px;
+    color: white;
+    background-color: #5468FF;
+    padding: 5px 20px;
+    border: 3px solid white;
+}
+
+.SideNav li a:hover {
+    color: #5468FF;
+    background-color: white;
+}

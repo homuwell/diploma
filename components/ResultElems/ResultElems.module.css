@@ -1,0 +1,11 @@
+.container {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 5px;
+
+
+}
+
+.container div {
+    word-break: break-word;
+}

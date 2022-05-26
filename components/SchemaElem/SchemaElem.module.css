@@ -1,0 +1,20 @@
+.elemContainer {
+    display: flex;
+    flex-direction: column;
+    max-width: 80px;
+    word-break: break-all;
+}
+
+
+.button {
+    margin:  0 0 0 10px ;
+}
+
+ .moveRight {
+    margin-left: auto;
+}
+
+.elemContainer label {
+    font-size: 13px;
+    margin:  0 0 5px 0 ;
+}
