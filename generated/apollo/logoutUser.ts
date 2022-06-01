@@ -11,7 +11,7 @@
 
 export interface logoutUser_logoutUser {
   __typename: "User";
-  login: string;
+  id: number;
 }
 
 export interface logoutUser {

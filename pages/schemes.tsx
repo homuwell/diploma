@@ -9,6 +9,7 @@ import GridSchema from "../components/GridSchema";
 import serverAuth from '../components/serverAuth';
 import {getUserSchemes} from "../generated/apollo/getUserSchemes";
 import SchemesList from "../components/SchemesList";
+import Container from "../components/Container";
 const GET_USER_SCHEMES =  gql`
     query getUserSchemes {
         getUserSchemes {
@@ -21,12 +22,12 @@ const GET_USER_SCHEMES =  gql`
 function Schemes({data} :any) {
     console.log(data);
     return (
-            <PageContainer>
+            <Container>
                 <h1>Список схем</h1>
                 <SchemesList
                     initialValues={data}
                 />
-            </PageContainer>
+            </Container>
 
 
     );

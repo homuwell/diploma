@@ -12,6 +12,7 @@
 export interface getUserSchemes_getUserSchemes {
   __typename: "Schema";
   id: number;
+  name: string;
 }
 
 export interface getUserSchemes {

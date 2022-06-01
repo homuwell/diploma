@@ -4,8 +4,6 @@
 // This file was automatically generated and should not be edited.
 
 
-import { Role } from "./globalTypes";
-
 // ====================================================
 // GraphQL query operation: getUserData
 // ====================================================
@@ -13,12 +11,9 @@ import { Role } from "./globalTypes";
 
 export interface getUserData_getUserData {
   __typename: "User";
+  id: number;
   login: string;
-  name: string;
-  surname: string;
-  phoneNumber: string;
-  email: string;
-  role: Role;
+  picture: string;
 }
 
 export interface getUserData {

@@ -28,7 +28,7 @@ function Password(props:any) {
                 email: form.email.value,
             }
         }).then((msg) => {
-            setResponse({type: 'success', message: `на ваш email: ${msg.data.resetPasswordLink.email} отправлена ссылка для изменения пароля`});
+            setResponse({type: 'success', message: `на ваш email: ${msg!.data!.resetPasswordLink!.email} отправлена ссылка для изменения пароля`});
 
         }).catch((err)=> {
             setResponse({type: 'error', message: err.message});

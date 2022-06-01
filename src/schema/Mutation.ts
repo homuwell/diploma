@@ -6,7 +6,7 @@ import sendEmail from "../../lib/sendEmail";
 import {removeCookies, setCookies} from "cookies-next";
 import sendResetPassLink from "../../lib/passResetEmail";
 import {form_d, form_s, gauss_c, sf1, sf2} from "../../schemaCalculations/functionsLibrary";
-import {AuthenticationError} from "apollo-server-micro";
+import {AuthenticationError} from "apollo-server-express";
 import {InputOperationAmplifiersType} from "./operationAmplifiers";
 const MAX_NODES = 100;
 const MAX_BIPOLAR = 50;
@@ -61,8 +61,8 @@ export const createUser = mutationField('createUser',{
                 phoneNumber: args.phoneNumber,
                 email: args.email,
                 password: sha256((args.password + process.env.SALT)),
-                refreshToken: '',
-                picture: ''
+                refreshToken: v4(),
+                picture: '/userImages/default.png'
             }
         });
         const activationLinkObj = {
@@ -108,8 +108,8 @@ export const loginUser = mutationField('loginUser', {
             uuid: v4(),
             time: Date.now()
         }, process.env.SECRET_REFRESH,{expiresIn: '30d'});
-        setCookies('refreshToken', refreshToken,{req: ctx.req, res: ctx.res, path: '/', httpOnly: true, maxAge: 30*24*60*60 });
-        setCookies('accessToken', accessToken,{req: ctx.req, res: ctx.res, path: '/', httpOnly: true, maxAge: 60*30});
+        setCookies('refreshToken', refreshToken,{req: ctx.req, res: ctx.res, path: '/', httpOnly: true, sameSite: 'strict', secure: true,maxAge: 30*24*60*60 });
+        setCookies('accessToken', accessToken,{req: ctx.req, res: ctx.res, path: '/', httpOnly: true,sameSite: 'strict', secure: true, maxAge: 60*30});
         await ctx.prisma.user.update({
             where: {
                 login: args.login

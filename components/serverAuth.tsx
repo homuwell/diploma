@@ -14,12 +14,13 @@ export default function ServerAuth(gssp: Function) {
                     isVerify = true;
                 }).catch((err :any) => {
                     isVerify = false;
+                    console.log(err);
                 })
             }
             if(!isVerify) {
 
                 ctx.res.writeHead(302, {
-                    Location: 'http://localhost:3000/login?err=unauthorised'
+                    Location: 'https://localhost:4000/login?err=unauthorised'
                 });
                 ctx.res.end();
             }

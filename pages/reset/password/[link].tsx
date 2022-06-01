@@ -1,7 +1,7 @@
-import React from 'react';
-import {gql} from "apollo-server-micro";
+import React, {useState} from 'react';
+
 import {initializeApollo} from "../../../lib/ApolloClient";
-import {useMutation} from "@apollo/client";
+import {gql, useMutation} from "@apollo/client";
 import FormContainer from "../../../components/FormContainer";
 import Button from "../../../components/Button";
 import useForm from "../../../hooks/useForm";
@@ -37,13 +37,13 @@ const RESET_PASSWORD =gql`
 `;
 
 function ResetPassword(props:any) {
+    const [resetPassword] = useMutation<resetPassword, resetPasswordVariables>(RESET_PASSWORD);
+    const [form,renderFormInputs, isFormValid] = useForm(resetPasswordForm);
+    const [response, setResponse] = useState({type: '', message: ''});
 
     if (props.error) {
         return <>{props.error}</>
     }
-    const [resetPassword] = useMutation<resetPassword, resetPasswordVariables>(RESET_PASSWORD);
-    const [form,renderFormInputs, isFormValid] = useForm(resetPasswordForm);
-    const [response, setResponse] = React.useState({type: '', message: ''});
     const sendLink = (e: any) => {
         e.preventDefault();
         resetPassword({

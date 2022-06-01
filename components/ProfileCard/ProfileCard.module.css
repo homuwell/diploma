@@ -1,0 +1,36 @@
+.container {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+    align-items: center;
+    height: 80%;
+    flex: 60%;
+    flex-shrink: 0;
+}
+
+.container form {
+    width: 30%;
+}
+
+.dataCard {
+    display: flex;
+    flex-direction: row;
+    border: black 1px solid;
+    border-radius: 10px;
+    height: 100%;
+    background-color: gray;
+    align-items: center;
+    width: 80%;
+    padding: 0 10px;
+}
+
+.dataCard ul {
+    line-height: 150%;
+    margin: 0;
+    width: 50%;
+    padding: 0;
+
+}

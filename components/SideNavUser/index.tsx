@@ -1,14 +1,16 @@
 import Image from 'next/image'
 import classes from './SideNavUser.module.css'
-import React, {useEffect, useRef, useState} from "react";
+import React from "react";
 import Link from "next/link";
 import {gql, useMutation} from "@apollo/client";
-import {logoutUser} from "../../src";
 import {useRouter} from "next/router";
+import {Role} from "../../generated/apollo/globalTypes";
+
 type SideNavUserProps = {
     login: string,
     picture: string
     id: number
+    role: Role
 }
 
 const LOGOUT_USER = gql`
@@ -21,7 +23,7 @@ const LOGOUT_USER = gql`
 
 
 
-const SideNavUser = ({login,picture,id}: SideNavUserProps) => {
+const SideNavUser = ({login,picture,role, id}: SideNavUserProps) => {
     const router = useRouter()
     const [logoutUser] = useMutation<any>(LOGOUT_USER);
     const dropDownControl = (e:any) => {
@@ -79,6 +81,13 @@ const SideNavUser = ({login,picture,id}: SideNavUserProps) => {
                     </svg>
                     </a>
                     <ul className={classes.dropdownMenu}>
+                        {role === Role.ADMIN && (
+                            <li>
+                                <Link href = '/admin'>
+                                    <a>Панель</a>
+                                </Link>
+                            </li>
+                        )}
                         <li>
                             <Link href = '/profile'>
                                 <a>Профиль</a>

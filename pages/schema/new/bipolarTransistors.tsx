@@ -114,7 +114,7 @@ const CREATE_BIPOLAR_TRANSISTORS_MUTATION = gql`
         }
     }
 `
-const bipolarTransistors = () => {
+const BipolarTransistors = () => {
     const router = useRouter();
     return (
         <>
@@ -123,4 +123,4 @@ const bipolarTransistors = () => {
     );
 };
 
-export default bipolarTransistors;
+export default BipolarTransistors;

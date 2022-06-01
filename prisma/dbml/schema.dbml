@@ -1,0 +1,311 @@
+//// ------------------------------------------------------
+//// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+//// ------------------------------------------------------
+
+Table User {
+  id Int [pk, increment]
+  createdAt DateTime [default: `now()`, not null]
+  login String [unique, not null]
+  picture String [unique, not null]
+  email String [unique, not null]
+  name String [not null]
+  surname String [not null]
+  phoneNumber String [unique, not null]
+  isActivated Boolean [not null, default: false]
+  password String [not null]
+  role Role [not null, default: 'USER']
+  refreshToken String [unique, not null]
+  Schema Schema [not null]
+  News News [not null]
+}
+
+Table News {
+  id Int [pk, increment]
+  title String [unique, not null]
+  description String [not null]
+  Comment Comment [not null]
+  image String [not null]
+  User User [not null]
+  authorName String [not null]
+}
+
+Table Comment {
+  id Int [pk, increment]
+  image String [not null]
+  text String [not null]
+  News News [not null]
+  newsId Int [not null]
+}
+
+Table Resistor {
+  id Int [pk, increment]
+  Schema Schema [not null]
+  schemaId Int [not null]
+  pNode Int [not null]
+  mNode Int [not null]
+  resistance Float [not null]
+}
+
+Table Inductor {
+  id Int [pk, increment]
+  Schema Schema [not null]
+  schemaId Int [not null]
+  pNode Int [not null]
+  mNode Int [not null]
+  induction Float [not null]
+}
+
+Table Capacitor {
+  id Int [pk, increment]
+  Schema Schema [not null]
+  schemaId Int [not null]
+  pNode Int [not null]
+  mNode Int [not null]
+  capacity Float [not null]
+}
+
+Table VCCS {
+  id Int [pk, increment]
+  Schema Schema [not null]
+  schemaId Int [not null]
+  pFirstNode Int [not null]
+  mFirstNode Int [not null]
+  pSecondNode Int [not null]
+  mSecondNode Int [not null]
+  transmission Float [not null]
+  T1 Float [not null]
+  T2 Float [not null]
+}
+
+Table CCCS {
+  id Int [pk, increment]
+  Schema Schema [not null]
+  schemaId Int [not null]
+  pFirstNode Int [not null]
+  mFirstNode Int [not null]
+  pSecondNode Int [not null]
+  mSecondNode Int [not null]
+  transmission Float [not null]
+  T1 Float [not null]
+  T2 Float [not null]
+}
+
+Table CCVS {
+  id Int [pk, increment]
+  Schema Schema [not null]
+  schemaId Int [not null]
+  pFirstNode Int [not null]
+  mFirstNode Int [not null]
+  pSecondNode Int [not null]
+  mSecondNode Int [not null]
+  transmission Float [not null]
+  T1 Float [not null]
+  T2 Float [not null]
+}
+
+Table VCVS {
+  id Int [pk, increment]
+  Schema Schema [not null]
+  schemaId Int [not null]
+  pFirstNode Int [not null]
+  mFirstNode Int [not null]
+  pSecondNode Int [not null]
+  mSecondNode Int [not null]
+  transmission Float [not null]
+  T1 Float [not null]
+  T2 Float [not null]
+}
+
+Table idealTransformer {
+  id Int [pk, increment]
+  Schema Schema [not null]
+  schemaId Int [not null]
+  pFirstNode Int [not null]
+  mFirstNode Int [not null]
+  pSecondNode Int [not null]
+  mSecondNode Int [not null]
+  gain Float [not null]
+}
+
+Table transformer {
+  id Int [pk, increment]
+  Schema Schema [not null]
+  schemaId Int [unique, not null]
+  pFirstNode Int [not null]
+  mFirstNode Int [not null]
+  pSecondNode Int [not null]
+  mSecondNode Int [not null]
+  R1 Float [not null]
+  R2 Float [not null]
+  L1 Float [not null]
+  L2 Float [not null]
+  M Float [not null]
+}
+
+Table idealOperationAmplifier {
+  id Int [pk, increment]
+  Schema Schema [not null]
+  schemaId Int [not null]
+  pFirstNode Int [not null]
+  mFirstNode Int [not null]
+  pSecondNode Int [not null]
+  mSecondNode Int [not null]
+}
+
+Table operationAmplifier {
+  id Int [pk, increment]
+  Schema Schema [not null]
+  schemaId Int [not null]
+  pFirstNode Int [not null]
+  mFirstNode Int [not null]
+  pSecondNode Int [not null]
+  mSecondNode Int [not null]
+  rIn Float [not null]
+  rOut Float [not null]
+  u Float [not null]
+  fT Float [not null]
+}
+
+Table CalculationDirectives {
+  id Int [pk, increment]
+  Schema Schema [not null]
+  schemaId Int [unique, not null]
+  functionType FunctionType [not null]
+  first Float [not null]
+  second Float [not null]
+  third Float [not null]
+  inNodeM Int [not null]
+  inNodeP Int [not null]
+  outNodeM Int [not null]
+  outNodeP Int [not null]
+}
+
+Table bipolarTransistor {
+  id Int [pk, increment]
+  Schema Schema [not null]
+  schemaId Int [unique, not null]
+  ne Int [not null]
+  nc Int [not null]
+  nb Int [not null]
+  Rb Float [not null]
+  Re Float [not null]
+  Rc Float [not null]
+  Ce Float [not null]
+  Cc Float [not null]
+  b Float [not null]
+}
+
+Table unipolarTransistor {
+  id Int [pk, increment]
+  Schema Schema [not null]
+  schemaId Int [unique, not null]
+  nz Int [not null]
+  ns Int [not null]
+  ni Int [not null]
+  Rc Float [not null]
+  Czi Float [not null]
+  Czs Float [not null]
+  Csi Float [not null]
+  S Float [not null]
+}
+
+Table SchemaResults {
+  id Int [pk, increment]
+  Schema Schema [not null]
+  schemaId Int [not null]
+  f Float [not null]
+  kum Float [not null]
+  kua Float [not null]
+  rim Float [not null]
+  ria Float [not null]
+  roa Float [not null]
+  rom Float [not null]
+}
+
+Table Schema {
+  id Int [pk, increment]
+  User User [not null]
+  UserId Int [not null]
+  name String [not null]
+  nv Int [not null, default: 0]
+  nr Int [not null, default: 0]
+  nc Int [not null, default: 0]
+  nl Int [not null, default: 0]
+  nf Int [not null, default: 0]
+  nou Int [not null, default: 0]
+  noui Int [not null, default: 0]
+  nji Int [not null, default: 0]
+  nei Int [not null, default: 0]
+  nju Int [not null, default: 0]
+  nev Int [not null, default: 0]
+  ntr Int [not null, default: 0]
+  ntri Int [not null, default: 0]
+  ntb Int [not null, default: 0]
+  ntu Int [not null, default: 0]
+  lp Int [not null, default: 0]
+  lm Int [not null, default: 0]
+  kp Int [not null, default: 0]
+  km Int [not null, default: 0]
+  Resistor Resistor [not null]
+  Inductor Inductor [not null]
+  Capacitor Capacitor [not null]
+  VCCS VCCS [not null]
+  VCVS VCVS [not null]
+  CCCS CCCS [not null]
+  CCVS CCVS [not null]
+  unipolarTransistor unipolarTransistor [not null]
+  bipolarTransistor bipolarTransistor [not null]
+  transformer transformer [not null]
+  idealTransformer idealTransformer [not null]
+  operationAmplifier operationAmplifier [not null]
+  idealOperationAmplifier idealOperationAmplifier [not null]
+  CalculationDirectives CalculationDirectives
+  SchemaResults SchemaResults [not null]
+}
+
+Enum FunctionType {
+  SINGLE
+  LINEAR
+  LOGARITHMIC
+}
+
+Enum Role {
+  USER
+  ADMIN
+}
+
+Ref: News.authorName > User.login
+
+Ref: Comment.newsId > News.id
+
+Ref: Resistor.schemaId > Schema.id
+
+Ref: Inductor.schemaId > Schema.id
+
+Ref: Capacitor.schemaId > Schema.id
+
+Ref: VCCS.schemaId > Schema.id
+
+Ref: CCCS.schemaId > Schema.id
+
+Ref: CCVS.schemaId > Schema.id
+
+Ref: VCVS.schemaId > Schema.id
+
+Ref: idealTransformer.schemaId > Schema.id
+
+Ref: transformer.schemaId > Schema.id
+
+Ref: idealOperationAmplifier.schemaId > Schema.id
+
+Ref: operationAmplifier.schemaId > Schema.id
+
+Ref: CalculationDirectives.schemaId - Schema.id
+
+Ref: bipolarTransistor.schemaId > Schema.id
+
+Ref: unipolarTransistor.schemaId > Schema.id
+
+Ref: SchemaResults.schemaId > Schema.id
+
+Ref: Schema.UserId > User.id

@@ -4,6 +4,7 @@ import {loginForm} from "../lib/loginForm";
 import PageContainer from "./PageContainer";
 import Button from "./Button";
 import {useMutation} from "@apollo/client";
+import Container from "./Container";
 function MyForm({router, elemName, name,elemForm, mutation, getData} :any) {
     const [submitMutation] = useMutation(mutation);
     console.log(router.query);
@@ -49,12 +50,12 @@ function MyForm({router, elemName, name,elemForm, mutation, getData} :any) {
     }
     const [form,renderFormInputs, isFormValid] = useForm(elemForm);
     return (
-        <PageContainer>
+        <Container>
             {response && <p>{response.message}</p>}
             <h1>{name}</h1>
             {renderFormInputs()}
             <Button disabled = {!isFormValid()} type='submit' callback={submitForm}>Войти</Button>
-        </PageContainer>
+        </Container>
     );
 }
 

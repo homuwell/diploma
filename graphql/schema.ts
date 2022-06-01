@@ -2,6 +2,9 @@ import {makeSchema, queryType, objectType, enumType, mutationType, fieldAuthoriz
 
 import path from 'path'
 import * as types from './../src/index'
+import {AuthenticationError} from "apollo-server-express";
+
+
 
 
 export const schema = makeSchema({
@@ -20,6 +23,10 @@ export const schema = makeSchema({
         export: "Context"
     },
     plugins: [
-        fieldAuthorizePlugin()
+        fieldAuthorizePlugin({
+            formatError: ({error}) => {
+                return new AuthenticationError('Not Authorized');
+            }
+        })
     ]
 });

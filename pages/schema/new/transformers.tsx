@@ -114,7 +114,7 @@ const CREATE_TRANSFORMERS_MUTATION = gql`
         }
     }
 `
-const unipolarTransistors = () => {
+const Transformers = () => {
     const router = useRouter();
     return (
         <>
@@ -123,4 +123,4 @@ const unipolarTransistors = () => {
     );
 };
 
-export default unipolarTransistors;
+export default Transformers;

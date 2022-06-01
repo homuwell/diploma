@@ -9,6 +9,7 @@ import serverAuth from "../../../components/serverAuth";
 import {GetServerSidePropsContext} from "next";
 import {createSchema,createSchemaVariables} from "../../../generated/apollo/createSchema";
 import idealOperationAmplifiers from "./idealOperationAmplifiers";
+import Container from "../../../components/Container";
 const CREATE_SCHEMA_MUTATION = gql`
     mutation createSchema (
         $name: String!
@@ -123,12 +124,12 @@ function General() {
         })
     }
     return (
-        <PageContainer>
+        <Container>
             <h1>Основные параметры схемы</h1>
             {response && <p>{response.message}</p>}
             {renderFormInputs()}
             <Button disabled = {!isFormValid()} type='submit' callback={createSchema}>Войти</Button>
-        </PageContainer>
+        </Container>
     );
 }
 

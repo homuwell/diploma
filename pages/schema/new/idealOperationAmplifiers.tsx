@@ -68,7 +68,7 @@ const CREATE_IDEAL_OPERATION_AMPLIFIERS_MUTATION = gql`
         }
     }
 `
-const idealOperationAmplifiers = () => {
+const IdealOperationAmplifiers = () => {
     const router = useRouter();
     return (
         <>
@@ -77,4 +77,4 @@ const idealOperationAmplifiers = () => {
     );
 };
 
-export default idealOperationAmplifiers;
+export default IdealOperationAmplifiers;

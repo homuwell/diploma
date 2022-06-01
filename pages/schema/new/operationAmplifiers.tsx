@@ -107,7 +107,7 @@ const CREATE_OPERATION_AMPLIFIERS_MUTATION = gql`
         }
     }
 `
-const operationAmplifiers = () => {
+const OperationAmplifiers = () => {
     const router = useRouter();
     return (
         <>
@@ -123,4 +123,4 @@ export const  getServerSideProps = serverAuth (async (ctx: GetServerSidePropsCon
     }
 })
 
-export default operationAmplifiers;
+export default OperationAmplifiers;

@@ -1,9 +1,9 @@
 import React from 'react';
 import {initializeApollo} from "../../lib/ApolloClient";
-import {gql} from 'apollo-server-micro'
 import {GetServerSideProps} from "next";
 import {activateAccount, activateAccountVariables} from "../../generated/apollo/activateAccount";
-import {ApolloError} from "@apollo/client";
+import {ApolloError, gql} from "@apollo/client";
+
 const sha256 = require('js-sha256');
 
  const ACTIVATE_ACCOUNT_MUTATION =gql`

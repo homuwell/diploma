@@ -87,7 +87,7 @@ const createApolloClient = (context: any = null) => {
                                     );
                                     context.req.cookies.accessToken = token;
                                     context.req.authorization = `bearer ${token}`;
-                                    setCookies('accessToken', token,{req: context.req, res: context.res, path: '/', httpOnly: true, domain: 'localhost', maxAge: 30 * 60});
+                                    setCookies('accessToken', token,{req: context.req, res: context.res, path: '/', httpOnly: true, domain: 'localhost', sameSite: 'strict', secure: true, maxAge: 30 * 60});
                                 }
                                 const subscriber = {
                                     next: observer.next.bind(observer),
@@ -118,7 +118,8 @@ const createApolloClient = (context: any = null) => {
     })
 
     const wsLink = typeof window !== 'undefined' ? new GraphQLWsLink(createClient({
-        url: 'ws://localhost:4000/api/graphql',
+        url: 'wss://localhost:4000/api/graphql',
+
     })): null;
 
 
@@ -150,7 +151,7 @@ const createApolloClient = (context: any = null) => {
 
 
     const httpLink =   createUploadLink({
-            uri: 'http://localhost:3000/api/graphql',
+            uri: 'https://localhost:4000/api/graphql',
             // Make sure that CORS and cookies work
 
         fetchOptions: {

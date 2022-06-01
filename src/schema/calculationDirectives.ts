@@ -1,8 +1,6 @@
 import {CalculationDirectives, Capacitor} from 'nexus-prisma'
 import {extendType, floatArg, intArg, list, objectType, stringArg} from "nexus";
-import {AuthenticationError} from "apollo-server-micro";
 const jwt = require('jwt-then')
-import {CapacitorObject, InputCapacitorsType} from "./capacitors";
 
 export const CalculationDirectivesObject = objectType({
     name: CalculationDirectives.$name,

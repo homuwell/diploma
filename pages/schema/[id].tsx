@@ -25,14 +25,7 @@ const GET_SCHEMA_RESULTS_QUERY = gql`
         }
     }
 `
-const CALCULATE_SCHEMA_MUTATION = gql`
-    mutation calculateSchema(
-        $id: Int!
-    ) {
-        calculateSchema(id: $id) 
-    }
 
-`
 const GET_SCHEMA = gql`
     query getSchema (
         $id: Int!
@@ -470,6 +463,47 @@ const ADD_IDEAL_OPERATION_AMPLIFIER_MUTATION = gql`
     }
 `
 
+const DELETE_VCCS_FD_MUTATION = gql`
+    mutation delete_FD_VCCS(
+        $elemId: Int!
+    ) {
+        deleteVCCS(
+            elemId: $elemId
+        )
+    }
+
+`
+const CHANGE_VCCS_FD_MUTATION = gql`
+    mutation change_FD_VCCS(
+        $elemId: Int!
+        $data: InputControlledSource!
+    ) {
+        changeVCCS(
+            elemId: $elemId
+            data: $data
+        )
+    }
+`
+
+const ADD_VCCS_FD_MUTATION = gql`
+    mutation add_FD_VCCS(
+        $schemaId: Int!
+        $data: InputControlledSource!
+    ) {
+        addVCCS(
+            schemaId: $schemaId
+            data: $data
+        ) {
+            id
+        }
+    }
+`
+
+
+
+
+
+
 const DELETE_VCCS_MUTATION = gql`
     mutation deleteVCCS(
         $elemId: Int!
@@ -498,6 +532,42 @@ const ADD_VCCS_MUTATION = gql`
         $data: InputControlledSource!
     ) {
         addVCCS(
+            schemaId: $schemaId
+            data: $data
+        ) {
+            id
+        }
+    }
+`
+
+const DELETE_CCCS_FD_MUTATION = gql`
+    mutation delete_FD_CCCS(
+        $elemId: Int!
+    ) {
+        deleteCCCS(
+            elemId: $elemId
+        )
+    }
+
+`
+const CHANGE_CCCS_FD_MUTATION = gql`
+    mutation change_FD_CCCS(
+        $elemId: Int!
+        $data: InputControlledSource!
+    ) {
+        changeCCCS(
+            elemId: $elemId
+            data: $data
+        )
+    }
+`
+
+const ADD_CCCS_FD_MUTATION = gql`
+    mutation add_FD_CCCS(
+        $schemaId: Int!
+        $data: InputControlledSource!
+    ) {
+        addCCCS(
             schemaId: $schemaId
             data: $data
         ) {
@@ -541,6 +611,42 @@ const ADD_CCCS_MUTATION = gql`
         }
     }
 `
+
+const DELETE_CCVS_FD_MUTATION = gql`
+    mutation delete_FD_CCVS(
+        $elemId: Int!
+    ) {
+        deleteCCVS(
+            elemId: $elemId
+        )
+    }
+`
+const CHANGE_CCVS_FD_MUTATION = gql`
+    mutation change_FD_CCVS(
+        $elemId: Int!
+        $data: InputControlledSource!
+    ) {
+        changeCCVS(
+            elemId: $elemId
+            data: $data
+        )
+    }
+`
+
+const ADD_CCVS_FD_MUTATION = gql`
+    mutation add_FD_CCVS(
+        $schemaId: Int!
+        $data: InputControlledSource!
+    ) {
+        addCCVS(
+            schemaId: $schemaId
+            data: $data
+        ) {
+            id
+        }
+    }
+`
+
 const DELETE_CCVS_MUTATION = gql`
     mutation deleteCCVS(
         $elemId: Int!
@@ -549,7 +655,6 @@ const DELETE_CCVS_MUTATION = gql`
             elemId: $elemId
         )
     }
-
 `
 const CHANGE_CCVS_MUTATION = gql`
     mutation changeCCVS(
@@ -577,8 +682,46 @@ const ADD_CCVS_MUTATION = gql`
     }
 `
 
+const DELETE_VCVS_FD_MUTATION = gql`
+    mutation delete_FD_VCVS(
+        $elemId: Int!
+    ) {
+        deleteVCVS(
+            elemId: $elemId
+        )
+    }
+
+`
+const CHANGE_VCVS_FD_MUTATION = gql`
+    mutation change_FD_VCVS(
+        $elemId: Int!
+        $data: InputControlledSource!
+    ) {
+        changeVCVS(
+            elemId: $elemId
+            data: $data
+        )
+    }
+`
+
+const ADD_VCVS_FD_MUTATION = gql`
+    mutation add_FD_VCVS(
+        $schemaId: Int!
+        $data: InputControlledSource!
+    ) {
+        addVCVS(
+            schemaId: $schemaId
+            data: $data
+        ) {
+            id
+        }
+    }
+`
+
+
+
 const DELETE_VCVS_MUTATION = gql`
-    mutation deleteCCCS(
+    mutation deleteVCVS(
         $elemId: Int!
     ) {
         deleteVCVS(
@@ -588,7 +731,7 @@ const DELETE_VCVS_MUTATION = gql`
 
 `
 const CHANGE_VCVS_MUTATION = gql`
-    mutation changeCCCS(
+    mutation changeVCVS(
         $elemId: Int!
         $data: InputControlledSource!
     ) {
@@ -682,22 +825,7 @@ const ADD_UNIPOLAR_TRANSISTOR_MUTATION = gql`
         }
     }
 `
-const CHANGE_IN_NODE_MUTATION = gql`
-    mutation changeInNode(
-        $schemaId: Int!
-        $plus: Int!
-        $minus: Int!
-    ) {
-        changeInNode(
-            schemaId: $schemaId
-            plus: $plus
-            minus: $minus
-            
-        ) {
-            id
-        }
-    }
-`
+
 
 
 
@@ -858,9 +986,9 @@ function Schema(props: any) {
                     }
                 }
                 name = {'Частотно-зависимые ИТУН'}
-                changeCallback = {CHANGE_VCCS_MUTATION}
-                deleteCallback = {DELETE_VCCS_MUTATION}
-                addCallback = {ADD_VCCS_MUTATION}
+                changeCallback = {CHANGE_VCCS_FD_MUTATION}
+                deleteCallback = {DELETE_VCCS_FD_MUTATION}
+                addCallback = {ADD_VCCS_FD_MUTATION}
                 schemaId = {+props.schemaId}
             />
             <SchemaElems
@@ -896,9 +1024,9 @@ function Schema(props: any) {
                     }
                 }
                 name = {'Частотно-зависимые ИТУТ'}
-                changeCallback = {CHANGE_CCCS_MUTATION}
-                deleteCallback = {DELETE_CCCS_MUTATION}
-                addCallback = {ADD_CCCS_MUTATION}
+                changeCallback = {CHANGE_CCCS_FD_MUTATION}
+                deleteCallback = {DELETE_CCCS_FD_MUTATION}
+                addCallback = {ADD_CCCS_FD_MUTATION}
                 schemaId = {+props.schemaId}
             />
             <SchemaElems
@@ -934,9 +1062,9 @@ function Schema(props: any) {
                     }
                 }
                 name = {'Частотно-зависимые ИНУН'}
-                changeCallback = {CHANGE_VCVS_MUTATION}
-                deleteCallback = {DELETE_VCVS_MUTATION}
-                addCallback = {ADD_VCVS_MUTATION}
+                changeCallback = {CHANGE_VCVS_FD_MUTATION}
+                deleteCallback = {DELETE_VCVS_FD_MUTATION}
+                addCallback = {ADD_VCVS_FD_MUTATION}
                 schemaId = {+props.schemaId}
             />
             <SchemaElems
@@ -972,9 +1100,9 @@ function Schema(props: any) {
                     }
                 }
                 name = {'Частотно-зависимые ИНУТ'}
-                changeCallback = {CHANGE_CCVS_MUTATION}
-                deleteCallback = {DELETE_CCVS_MUTATION}
-                addCallback = {ADD_CCVS_MUTATION}
+                changeCallback = {CHANGE_CCVS_FD_MUTATION}
+                deleteCallback = {DELETE_CCVS_FD_MUTATION}
+                addCallback = {ADD_CCVS_FD_MUTATION}
                 schemaId = {+props.schemaId}
             />
             <SchemaElems

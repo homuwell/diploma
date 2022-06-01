@@ -1,85 +1,65 @@
-import React, {useState} from 'react';
+import {useState, FC} from 'react';
 
 import {ApolloClient, ApolloError, gql, NormalizedCache, NormalizedCacheObject, useMutation} from "@apollo/client";
 import {GetServerSidePropsContext} from "next";
 
+type ProfileData = {
+    login: string,
+    name: string,
+    surname: string
+    picture: string
+    role: Role
+    email: string
+    phoneNumber: string
+}
+
+type ProfileProps = {
+    data: getUserDataProfile_getUserData
+    error: string
+}
+
+
+
+
 import serverAuth from '../components/serverAuth';
-import {getUserData} from "../generated/apollo/getUserData";
+import {getUserData, getUserData_getUserData} from "../generated/apollo/getUserData";
+import Container from "../components/Container";
+import {Role} from "../generated/apollo/globalTypes";
+import ImageCard from "../components/ImageCard";
+import ProfileCard from "../components/ProfileCard";
+import {getUserDataProfile, getUserDataProfile_getUserData} from "../generated/apollo/getUserDataProfile";
+import ProfileInfo from "../components/ProfileInfo";
 
 
-const UPLOAD_USER_PICTURE = gql`
-    mutation uploadUserPicture (
-        $picture: Upload!
-    ) {
-        uploadUserPicture(picture: $picture) {
-            login
-        }
-    }
-
-
-`
 
 const GET_USER_DATA_QUERY = gql`
-    query getUserData {
-        getUserData{
+    query getUserDataProfile {
+        getUserData {
                         login
                         name
                         surname
                         phoneNumber
                         email
                         role
-                        }
+                        picture
+         }
       }
     
     
 `
-function Profile(props: any) {
-    const [file,setFile] = useState<any>(null);
-    const [uploadUserPicture] = useMutation(UPLOAD_USER_PICTURE);
-    const addPicture = (e:any) => {
-        e.preventDefault();
-        console.log(file);
-        uploadUserPicture({
-            variables: {
-                picture: file
-            }
-        }).then(()=>{
-            console.log('success');
-        }).catch(err => {
-            console.log('err: ' +err.message);
-        })
-    }
+const Profile: FC<ProfileProps> = ({data,error}) => {
     return (
-
-        <>
-            <h1>Привет мир!</h1>
-            {props?.error && <p>{props.error}</p>}
-            {props?.data &&
-                <ul>
-                    {Object.keys(props.data).map((visit, index) => <li key={index}>{visit} : {props.data[visit]}</li>)}
-                </ul>
-          }
-            <form>
-                <input type="file"
-                onChange={ ({target: {files}}) => {
-                    console.log(files![0]);
-                    setFile(files![0]);
-                }}
-                />
-                <button
-                    onClick={addPicture}
-
-                >
-
-                </button>
-            </form>
-        </>
+        <Container>
+            {error && <p>{error}</p>}
+            <h1 style={{textAlign: "center"}}>Профиль</h1>
+            <ProfileInfo data={data}/>
+        </Container>
     );
 };
 
 export const  getServerSideProps = serverAuth (async (ctx: GetServerSidePropsContext, apolloClient :ApolloClient<typeof ctx>) => {
     let obj;
-    await apolloClient.query<getUserData>({
+    await apolloClient.query<getUserDataProfile>({
         query: GET_USER_DATA_QUERY
     }).then((res) => {
         obj = {

@@ -1,6 +1,6 @@
 import {Capacitor} from 'nexus-prisma'
 import {extendType, inputObjectType, intArg, list, objectType} from "nexus";
-import {AuthenticationError} from "apollo-server-micro";
+
 const jwt = require('jwt-then')
 
 

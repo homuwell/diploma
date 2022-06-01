@@ -4,7 +4,6 @@ import { ApolloProvider} from '@apollo/client';
 import {initializeApollo, useApollo} from '../lib/ApolloClient'
 import UserContextProvider from '../lib/userContext'
 import Head from 'next/head'
-import MyNavigation from '../components/myNavigation'
 import React, {useEffect} from 'react';
 import {authUser} from "../generated/apollo/authUser";
 import {AUTH_USER_MUTATION} from "../graphql/mutations";

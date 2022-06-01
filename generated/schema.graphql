@@ -423,7 +423,6 @@ type Resistor {
 
 enum Role {
   ADMIN
-  PREMIUMUSER
   USER
 }
 

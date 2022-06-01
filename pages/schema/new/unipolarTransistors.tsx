@@ -105,7 +105,7 @@ const CREATE_UNIPOLAR_TRANSISTORS_MUTATION = gql`
         }
     }
 `
-const unipolarTransistors = () => {
+const UnipolarTransistors = () => {
     const router = useRouter();
     return (
         <>
@@ -114,4 +114,4 @@ const unipolarTransistors = () => {
     );
 };
 
-export default unipolarTransistors;
+export default UnipolarTransistors;

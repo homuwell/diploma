@@ -9,6 +9,13 @@ generator nexusPrisma {
   provider = "nexus-prisma"
 }
 
+generator dbml {
+  provider = "prisma-dbml-generator"
+}
+
+
+
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
@@ -28,8 +35,33 @@ model User {
   role         Role     @default(USER)
   refreshToken String   @unique
   Schema       Schema[]
+  News         News[]
+
+
 }
 
+
+model News {
+    id           Int      @id @default(autoincrement())
+    title        String   @unique
+    description  String
+    Comment      Comment[]
+    image        String
+    User         User @relation(fields: [authorName], references: [login])
+    authorName   String
+
+
+}
+
+model Comment {
+    id           Int      @id @default(autoincrement())
+    image        String
+    text         String
+    News   News @relation(fields: [newsId], references: [id])
+    newsId Int
+
+
+}
 
 model Resistor {
       id      Int  @id @default(autoincrement())
@@ -249,11 +281,6 @@ model Schema {
   ntri    Int  @default(0) // число идеальных трансформаторов
   ntb     Int  @default(0) // число биполярных транзисторов
   ntu     Int  @default(0) // число униполярных тразисторов
-
-  lp Int @default(0) // ?
-  lm Int @default(0) // ?
-  kp Int @default(0) // ?
-  km Int @default(0) // ?
   Resistor Resistor[]
   Inductor Inductor[]
   Capacitor Capacitor[]
@@ -273,7 +300,6 @@ model Schema {
 
 enum Role {
   USER
-  PREMIUMUSER
   ADMIN
 
 }
